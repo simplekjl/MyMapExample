@@ -13,23 +13,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <EditText
-        android:id="@+id/lat"
+        android:id="@+id/mLat"
         android:hint="Latitude"
         android:layout_below="@id/txtLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <EditText
-        android:id="@+id/lon"
+        android:id="@+id/mLon"
         android:hint="Longitude"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/lat"/>
+        android:layout_below="@id/mLat"/>
     <Button
         android:id="@+id/btnDale"
         android:text="Dale moreno!"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/lon"/>
+        android:layout_below="@id/mLon"
+        android:onClick="ponmela"/>
 
 
     <fragment

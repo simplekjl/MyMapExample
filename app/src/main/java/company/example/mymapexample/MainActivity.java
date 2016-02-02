@@ -2,22 +2,32 @@ package company.example.mymapexample;
 
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MainActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private TextView mLat;
+    private TextView mLon;
+    private Button   btn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mLat    = (TextView) findViewById(R.id.mLat);
+        mLon    = (TextView) findViewById(R.id.mLon);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -39,8 +49,32 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
+        LatLng sydney = new LatLng(33.894434, -84.464680);
         mMap.addMarker(new MarkerOptions().position(sydney).title("dale Nigga!"));
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(sydney,12));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(sydney, 12));
+    }
+
+    public void ponmela(View v)
+    {
+        if(validate())
+        {
+            LatLng mPoint = new LatLng(Double.valueOf(mLat.getText().toString()),Double.valueOf(mLon.getText().toString()));
+            mMap.clear();
+            mMap.addMarker(new MarkerOptions().position(mPoint).title("New Point" + mPoint.toString()));
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(mPoint,12));
+        }
+
+    }
+
+    boolean validate()
+    {
+        boolean flag = false;
+
+        if(mLat.getText().toString().isEmpty() && mLon.getText().toString().isEmpty())
+            flag = false;
+        else
+            flag = true;
+
+        return flag;
     }
 }
