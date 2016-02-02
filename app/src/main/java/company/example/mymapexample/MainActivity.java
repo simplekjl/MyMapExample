@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -58,11 +59,13 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     {
         if(validate())
         {
-            LatLng mPoint = new LatLng(Double.valueOf(mLat.getText().toString()),Double.valueOf(mLon.getText().toString()));
-            mMap.clear();
+            LatLng mPoint = new LatLng(Double.parseDouble(mLat.getText().toString()),Double.parseDouble(mLon.getText().toString()));
+            //mMap.clear();
             mMap.addMarker(new MarkerOptions().position(mPoint).title("New Point" + mPoint.toString()));
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(mPoint,12));
         }
+        else
+            Toast.makeText(this,"no hay datos",Toast.LENGTH_LONG).show();
 
     }
 
